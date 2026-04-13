@@ -1363,25 +1363,12 @@ function createBot() {
     });
   } catch (err) {
     addLog(`[Bot] Failed to create bot: ${err.message}`);
-    scheduleReconnect();
+   scheduleReconnect();
   }
 }
 
-function scheduleReconnect() {
-  clearBotTimeouts();
-
-  // FIX: don't stack reconnect if already waiting
-  if (isReconnecting) {
-    addLog("[Bot] Reconnect already scheduled, skipping duplicate.");
-    return;
-  }
-
-  isReconnecting = true;
-  botState.reconnectAttempts++;
-
-  const delay = getReconnectDelay();
-  addLog(
-    `[Bot] Reconnecting in ${delay / 1000}s (attempt #${botState.reconnectAttempts})`,
+function createBot
+    `[Bot] Reconnect ing in ${delay / 1000}s (attempt #${botState.reconnectAttempts})`,
   );
 
   reconnectTimeoutId = setTimeout(() => {
@@ -2066,6 +2053,16 @@ process.on("SIGINT", () => {
 //===============================
 // START THE BOT
 // ============================================================
+addLog("=".repeat(50));
+addLog("  Minecraft AFK Bot v2.5 - Bug-Fixed Edition");
+addLog("=".repeat(50));
+addLog(`Server: ${config.server.ip}:${config.server.port}`);
+addLog(`Version: ${config.server.version}`);
+addLog(
+  `Auto-Reconnect: ${config.utils["auto-reconnect"] ? "Enabled" : "Disabled"}`,
+);
+addLog("=".repeat(50));
+
 addLog("=".repeat(50));
 addLog("  Minecraft AFK Bot v2.5 - Bug-Fixed Edition");
 addLog("=".repeat(50));
